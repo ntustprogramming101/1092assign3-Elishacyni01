@@ -7,8 +7,21 @@ final int START_BUTTON_H = 60;
 final int START_BUTTON_X = 248;
 final int START_BUTTON_Y = 360;
 
+final int LIFE_ONE = 1;
+final int LIFE_TWO = 2;
+final int LIFE_THREE = 3;
+int gameLife = LIFE_TWO;
+
+int down = 0;
+int right = 0;
+int left = 0;
+int actionFrame = 15;
+final int BLOCK_WIDTH = 80;
+
 PImage title, gameover, startNormal, startHovered, restartNormal, restartHovered;
-PImage bg, soil8x24;
+PImage groundhogIdle, groundhogDown, groundhogLeft, groundhogRight;
+PImage bg, life, soil8x24, stone1, stone2;
+PImage soil0, soil1, soil2, soil3, soil4, soil5;
 
 // For debug function; DO NOT edit or remove this!
 int playerHealth = 0;
@@ -25,7 +38,20 @@ void setup() {
 	startHovered = loadImage("img/startHovered.png");
 	restartNormal = loadImage("img/restartNormal.png");
 	restartHovered = loadImage("img/restartHovered.png");
+  life = loadImage("img/life.png");
+  groundhogIdle = loadImage("img/groundhogIdle.png");
+  groundhogDown = loadImage("img/groundhogDown.png");
+  groundhogLeft = loadImage("img/groundhogLeft.png");
+  groundhogRight = loadImage("img/groundhogRight.png");
 	soil8x24 = loadImage("img/soil8x24.png");
+  soil0 = loadImage("img/soil0.png");
+  soil1 = loadImage("img/soil1.png");
+  soil2 = loadImage("img/soil2.png");
+  soil3 = loadImage("img/soil3.png");
+  soil4 = loadImage("img/soil4.png");
+  soil5 = loadImage("img/soil5.png");
+  stone1 = loadImage("img/stone1.png");
+  stone2 = loadImage("img/stone2.png");
 }
 
 void draw() {
@@ -71,10 +97,10 @@ void draw() {
 		image(bg, 0, 0);
 
 		// Sun
-	    stroke(255,255,0);
-	    strokeWeight(5);
-	    fill(253,184,19);
-	    ellipse(590,50,120,120);
+	  stroke(255,255,0);
+	  strokeWeight(5);
+	  fill(253,184,19);
+	  ellipse(590,50,120,120);
 
 		// Grass
 		fill(124, 204, 25);
@@ -82,11 +108,100 @@ void draw() {
 		rect(0, 160 - GRASS_HEIGHT, width, GRASS_HEIGHT);
 
 		// Soil - REPLACE THIS PART WITH YOUR LOOP CODE!
-		image(soil8x24, 0, 160);
+		//image(soil8x24, 0, 160);
+
+    // soil0 & soil1
+    for(int x=0; x<640; x+= BLOCK_WIDTH){
+      for(int y=0; y<320; y+= BLOCK_WIDTH){
+        image(soil0, x, y+160);
+        image(soil1, x, y+480);
+        image(stone1, x, x+160);
+      }
+    }
+    
+    // soil2 & soil3
+    for(int x=0; x<640; x+= BLOCK_WIDTH){
+      for(int y=0; y<320; y+= BLOCK_WIDTH){
+        image(soil2, x, y+800);
+        image(soil3, x, y+1120);
+      }
+    }
+    
+    for(int x=0; x<640; x+= BLOCK_WIDTH){
+      for(int y=0; y<640; y+= BLOCK_WIDTH){
+        if( y % (4*BLOCK_WIDTH) == 0 || y% (4*BLOCK_WIDTH) == 3*BLOCK_WIDTH){
+          if( x % (4*BLOCK_WIDTH) == 1*BLOCK_WIDTH || x % (4*BLOCK_WIDTH) == 2*BLOCK_WIDTH){
+            image(stone1, x, y+800);
+          }
+        }
+        if( y % (4*BLOCK_WIDTH) == 1*BLOCK_WIDTH || y% (4*BLOCK_WIDTH) == 2*BLOCK_WIDTH){
+          if( x % (4*BLOCK_WIDTH) == 0 || x % (4*BLOCK_WIDTH) == 3*BLOCK_WIDTH){
+            image(stone1, x, y+800);
+          }
+        }
+      }
+    }
+    
+    // soil4 & soil5
+    for(int x=0; x<640; x+= BLOCK_WIDTH){
+      for(int y=0; y<320; y+= BLOCK_WIDTH){
+        image(soil4, x, y+1440);
+        image(soil5, x, y+1760);
+      }
+    }
+    
+    for(int x=0; x<640; x+= BLOCK_WIDTH){
+      for(int y=0; y<640; y+= BLOCK_WIDTH){
+        if( y % (3*BLOCK_WIDTH) == 0){
+          if( x % (3*BLOCK_WIDTH) != 0){
+            image(stone1, x, y+1440);
+            if( x % (3*BLOCK_WIDTH) == 2*BLOCK_WIDTH){
+              image(stone2, x, y+1440);
+            }
+          }
+        }
+        if( y % (3*BLOCK_WIDTH) == 1*BLOCK_WIDTH){
+          if( x % (3*BLOCK_WIDTH) != 2*BLOCK_WIDTH){
+            image(stone1, x, y+1440);
+            if( x % (3*BLOCK_WIDTH) == 1*BLOCK_WIDTH){
+              image(stone2, x, y+1440);
+            }
+          }
+        }
+        if( y % (3*BLOCK_WIDTH) == 2*BLOCK_WIDTH){
+          if( x % (3*BLOCK_WIDTH) != 1*BLOCK_WIDTH){
+            image(stone1, x, y+1440);
+            if( x % (3*BLOCK_WIDTH) == 0){
+              image(stone2, x, y+1440);
+            }
+          }
+        }
+      }
+    }
 
 		// Player
 
 		// Health UI
+    switch(gameLife)
+    {
+      case LIFE_ONE:
+      //background(bg);
+      image(life, 10, 10);
+      break;
+      
+      case LIFE_TWO:
+      //background(bg);
+      image(life, 10, 10);
+      image(life, 80, 10);
+      break;
+      
+      case LIFE_THREE:
+      //background(bg);
+      image(life, 10, 10);
+      image(life, 80, 10);
+      image(life, 150, 10);
+      break;
+    }
 
 		break;
 
