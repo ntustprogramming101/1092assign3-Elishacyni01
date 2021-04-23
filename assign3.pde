@@ -370,19 +370,19 @@ void keyPressed(){
       case DOWN:
         if(groundhogY < 400){
           downPressed = true;
-          down = 15;
+          down = 16;
         }
         break;
       case LEFT:
         if(groundhogX > 0){
           leftPressed = true;
-          left = 15;
+          left = 16;
         }
         break;
       case RIGHT:
         if(groundhogX < 560){
           rightPressed = true;
-          right = 15;
+          right = 16;
         }
         break;
     }
