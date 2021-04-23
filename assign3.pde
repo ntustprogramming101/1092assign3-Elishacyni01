@@ -342,6 +342,9 @@ void draw() {
         
         // Health UI
         playerHealth = 2;
+        
+        // Down move reset
+        downMoveY = 0;
 			}
 		}else{
 
