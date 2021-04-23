@@ -259,7 +259,7 @@ void draw() {
       image(groundhogIdle, groundhogX, groundhogY);
     }
     
-    println(groundhogX, groundhogY);
+    //println(groundhogX, groundhogY);
     
     // Soldier
     // soldier random appear
@@ -278,7 +278,7 @@ void draw() {
           downMoveY = 0;
         }
       }
-    println(downMoveY);
+    //println(downMoveY);
     
     // Groundhog eat cabbage
       if(groundhogX < cabbageX + 80 && groundhogX + 80 > cabbageX){
