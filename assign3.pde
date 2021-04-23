@@ -259,7 +259,7 @@ void draw() {
       image(groundhogIdle, groundhogX, groundhogY);
     }
     
-    println(groundhogX, groundhogY);
+    //println(groundhogX, groundhogY);
     
     // Soldier
     // soldier random appear
