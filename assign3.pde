@@ -276,6 +276,9 @@ void draw() {
           groundhogX = 320;
           groundhogY = 80;
           downMoveY = 0;
+          down = 0;
+          right = 0;
+          left = 0;
         }
       }
     //println(downMoveY);
